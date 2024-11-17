@@ -1,0 +1,7 @@
+[package]
+name = "hf_playground"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hf_parser_rust = { path = "../HF-PARSER-RUST" }
