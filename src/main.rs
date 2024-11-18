@@ -8,10 +8,7 @@ fn main() {
 
     let ir = hf_codegen::ir::from_ast(ast);
 
-    let target = hf_codegen::target::Target {
-        arch: hf_codegen::target::Arch::X86_64,
-        os: hf_codegen::target::Os::Linux,
-    };
+    let target = hf_codegen::target::Target::native();
     let mut compiler = hf_codegen::compiler::HfCompiler::from_target(target);
 
     #[cfg(target_os = "windows")]
@@ -19,9 +16,11 @@ fn main() {
     #[cfg(target_os = "linux")]
     let mut bytecode = vec![0x49, 0x89, 0xf8];
 
-    bytecode.extend(compiler
-        .compile_to_bytecode(ir)
-        .expect("successful compilation"));
+    bytecode.extend(
+        compiler
+            .compile_to_bytecode(ir)
+            .expect("successful compilation"),
+    );
 
     bytecode.extend(vec![0xC3]);
 
