@@ -13,6 +13,10 @@ fn main() {
         os: hf_codegen::target::Os::Linux,
     };
     let mut compiler = hf_codegen::compiler::HfCompiler::from_target(target);
+
+    #[cfg(target_os = "windows")]
+    let mut bytecode = vec![0x49, 0x89, 0xc8];
+    #[cfg(target_os = "linux")]
     let mut bytecode = vec![0x49, 0x89, 0xf8];
 
     bytecode.extend(compiler
