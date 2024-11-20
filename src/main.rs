@@ -1,3 +1,5 @@
+use hf_codegen::compiler::CompilerSettings;
+
 fn main() {
     let filename = std::env::args().nth(1).expect("filename given");
     let file = std::fs::read_to_string(&filename).expect("read file");
@@ -9,7 +11,7 @@ fn main() {
     let ir = hf_codegen::ir::from_ast(ast);
 
     let target = hf_codegen::target::Target::native();
-    let mut compiler = hf_codegen::compiler::HfCompiler::from_target(target);
+    let mut compiler = hf_codegen::compiler::HfCompiler::new(target, CompilerSettings::default());
 
     #[cfg(target_os = "windows")]
     let mut bytecode = vec![0x49, 0x89, 0xc8];
