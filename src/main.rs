@@ -6,9 +6,10 @@ fn main() {
 
     let tokens = hf_parser_rust::token::tokenize(&file).expect("successful tokenization");
     let ast = hf_parser_rust::ast::build_ast(tokens).expect("successful ast build");
-    print!("{:#?}", ast);
+    println!("{:#?}", ast);
 
     let ir = hf_codegen::ir::from_ast(ast);
+    println!("{:#?}", ir);
 
     let target = hf_codegen::target::Target::native();
     let mut compiler = hf_codegen::compiler::HfCompiler::new(target, CompilerSettings::default());
