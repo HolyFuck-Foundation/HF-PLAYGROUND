@@ -31,6 +31,8 @@ fn main() {
     real_ir.extend(ir);
     real_ir.extend_from_slice(hf_exit);
 
+    println!("{:#?}", real_ir);
+
     let target = hf_codegen::target::Target::native();
     let mut compiler = hf_codegen::compiler::HfCompiler::new(target, CompilerSettings::default());
 
